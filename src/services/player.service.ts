@@ -5,6 +5,7 @@ import config from '../config'
 
 const getTrackSrc = ({ stream_url }) => `${stream_url}?client_id=${config.client_id}`
 const getProgress = player => () => (player.currentTime/player.duration) * 100
+const getPlayerState = player => () => !player.paused
 
 @Injectable()
 export class PlayerService {
@@ -13,7 +14,6 @@ export class PlayerService {
   currentState = new BehaviorSubject({
     playlist: null,
     currentTrack: null,
-    play: false,
     trackIndex: -1,
   })
 
@@ -25,39 +25,43 @@ export class PlayerService {
   .fromEvent(this.player, 'seeked')
   .map(getProgress(this.player));
 
+  playState: Observable<any> = Observable.merge(
+    Observable
+    .fromEvent(this.player, 'pause')
+    .map(getPlayerState(this.player)),
+    Observable
+    .fromEvent(this.player, 'play')
+    .map(getPlayerState(this.player))
+  )
+
   time: Observable<any> = Observable.merge(this.timeupdate, this.seeked);
 
   constructor() {
-    this.currentState.subscribe(({ currentTrack, play }) => {
-      if(!play) {
-        this.player.pause();
-      } else {
+    this.currentState.subscribe(({ currentTrack }) => {
+      if(currentTrack) {
         this.player.src = getTrackSrc(currentTrack);
         this.player.load();
         this.player.play();
       }
     })
     Observable.fromEvent(this.player, 'ended').subscribe(this.next)
-
   }
 
-  play(currentTrack, playlist, trackIndex): void {
-    this.currentState.next({
-      playlist,
-      currentTrack,
-      play: true,
-      trackIndex,
-    });
+  play(newTrack, playlist, trackIndex): void {
+    const { currentTrack } = this.currentState.getValue()
+    if(this.player.paused && currentTrack && currentTrack.id === newTrack.id) {
+      this.player.play()
+    } else {
+      this.currentState.next({
+        playlist,
+        currentTrack: newTrack,
+        trackIndex,
+      });
+    }
   }
 
   stop(): void {
-    const { playlist, currentTrack, trackIndex } = this.currentState.getValue();
-    this.currentState.next({
-      playlist,
-      currentTrack,
-      play: false,
-      trackIndex,
-    });
+    this.player.pause()
   }
 
   next = () => {
@@ -68,7 +72,6 @@ export class PlayerService {
         playlist,
         currentTrack: playlist[newIndex],
         trackIndex: newIndex,
-        play: true
       });
     }
   }
@@ -81,7 +84,6 @@ export class PlayerService {
         playlist,
         currentTrack: playlist[newIndex],
         trackIndex: newIndex,
-        play: true
       });
     }
   }

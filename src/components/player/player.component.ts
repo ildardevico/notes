@@ -14,14 +14,30 @@ export class PlayerComponent implements OnInit {
   currentTrack: Track;
   play: boolean;
   time: string;
+
   constructor(private playerService: PlayerService, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    this.playerService.currentState.subscribe(({ play, currentTrack }) => {
-      this.currentTrack = currentTrack
-      this.play = play
-    })
-    this.playerService.time.subscribe(time => this.time = `${time}%`)
+    const { currentState, time, playState } = this.playerService
+    currentState.subscribe(({ currentTrack }) => this.currentTrack = currentTrack)
+    time.subscribe(time => this.time = `${time}%`)
+    playState.subscribe(play => this.play = play)
+  }
+
+  next() {
+    this.playerService.next()
+  }
+
+  previous() {
+    this.playerService.previous()
+  }
+
+  stop() {
+    this.playerService.stop()
+  }
+
+  playTrack() {
+    this.playerService.player.play()
   }
 
   getImageUri = ({ avatar_url }) =>  this.sanitizer.bypassSecurityTrustStyle((`url(${avatar_url})`))

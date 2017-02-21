@@ -30,10 +30,10 @@ export class TrackListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.tracksService.tracks.subscribe(data => this.tracks = data)
     this.tracksService.tracksLoaded.subscribe(loaded => this.loaded = loaded)
-    this.playerService.currentState.subscribe(({ play, currentTrack }) => {
-      this.play = play
+    this.playerService.currentState.subscribe(({  currentTrack }) => {
       this.currentTrack = currentTrack
     })
+    this.playerService.playState.subscribe(play => this.play = play)
     document.querySelector('.tracks-container').addEventListener('scroll', this.checkLoadMore)
   }
 
