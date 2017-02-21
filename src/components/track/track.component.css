@@ -16,7 +16,7 @@
 
 .track-image .image-spinner-container {
   position: relative;
-  right: 12px; 
+  right: 12px;
 }
 
 .track-info {
@@ -36,6 +36,14 @@
   font-size: 13px;
   padding-left: 5px;
   color: #777;
+}
+
+.track-info .paused-container i {
+  position:absolute;
+}
+
+.track-info .paused-container {
+  color: rgb(185, 0, 0);
 }
 
 .track-actions i {

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { TracksService } from '../../services/tracks.service'
 import { PlayerService } from '../../services/player.service'
 import { Track } from '../../models'
+import { Observable } from 'rxjs';
 
 const checkIfScrollBottom = ({ scrollTop, scrollHeight, offsetHeight }) => scrollTop == (scrollHeight - offsetHeight)
 
@@ -10,7 +11,7 @@ const checkIfScrollBottom = ({ scrollTop, scrollHeight, offsetHeight }) => scrol
   templateUrl: './trackslist.component.html',
   styleUrls: ['./trackslist.component.css']
 })
-export class TrackListComponent implements OnInit, OnDestroy {
+export class TrackListComponent implements OnInit {
 
   tracks = [];
   loaded: boolean = false;
@@ -34,11 +35,9 @@ export class TrackListComponent implements OnInit, OnDestroy {
       this.currentTrack = currentTrack
     })
     this.playerService.playState.subscribe(play => this.play = play)
-    document.querySelector('.tracks-container').addEventListener('scroll', this.checkLoadMore)
-  }
-
-  ngOnDestroy(): void {
-    document.querySelector('.tracks-container').removeEventListener('scroll')
+    Observable
+    .fromEvent(document.querySelector('.tracks-container'), 'scroll')
+    .subscribe(this.checkLoadMore)
   }
 
   playTrack(trackIndex): void {

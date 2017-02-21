@@ -12,6 +12,10 @@
     <span class='track-name'>{{track.title}}</span><br/>
     <span>
       {{track.user.username}}
+      <span class='paused-container' *ngIf='currentTrack && !play && track.id == currentTrack.id'>
+        Paused
+        <i class="material-icons">pause</i>
+      </span>
     </span>
   </div>
   <div class='track-actions'>

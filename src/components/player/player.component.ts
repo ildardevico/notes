@@ -4,7 +4,6 @@ import { PlayerService } from '../../services/player.service'
 import { DomSanitizer } from '@angular/platform-browser'
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
