@@ -1,0 +1,17 @@
+.dropdown-container button {
+  color: #6f7771;
+}
+
+.dropdown-container.open button {
+  color: #ffffff;
+}
+
+.dropdown-container button:hover {
+  color: #ffffff;
+}
+
+.dropdown-menu {
+  max-height: 84vh;
+  overflow: auto;
+  top: 50px;
+}

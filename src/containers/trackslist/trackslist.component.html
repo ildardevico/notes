@@ -1,0 +1,11 @@
+<div [ngClass]="{'loaded': loaded}" class='tracks-container'>
+  <track-view
+   *ngFor='let track of tracks let i = index'
+   [track]='track'
+   (click)='playTrack(i)'
+   [currentTrack]='currentTrack'
+   [play]='play'
+   >
+  </track-view>
+</div>
+<spinner *ngIf='!loaded'></spinner>

@@ -1,0 +1,22 @@
+<div *ngIf='currentTrack' class="audio-player-wrapper">
+  <div class="progress">
+    <div class="progress-bar progress-bar-danger" [style.width]="time"></div>
+  </div>
+  <div class="audio-player-controls">
+    <div class="audio-player-button-wrappers">
+      <div class='play-navigation'>
+        <i class="material-icons">fast_rewind</i>
+        <i class="material-icons">{{!play ? 'play_arrow': 'pause'}}</i>
+        <i class="material-icons">fast_forward</i>
+      </div>
+      <div [style.background-image]="getImageUri(currentTrack.user)" class="audio-player-image">
+      </div>
+      <div class='track-info'>
+        <span class='track-name'>{{currentTrack.title}}</span><br/>
+        <span>
+          {{currentTrack.user.username}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

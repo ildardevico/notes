@@ -1,0 +1,20 @@
+<div class='sngle-track-view'>
+  <div [style.background-image]="getImageUri(track.user)" class='track-image'>
+    <div class='image-spinner-container'>
+      <spinner
+       *ngIf='currentTrack && play && track.id == currentTrack.id'
+       [main]='false'
+       >
+     </spinner>
+    </div>
+  </div>
+  <div class='track-info'>
+    <span class='track-name'>{{track.title}}</span><br/>
+    <span>
+      {{track.user.username}}
+    </span>
+  </div>
+  <div class='track-actions'>
+    <i class='material-icons'>favorite_bordered</i>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="navbar navbar-inverse navbar-static-top main-navbar">
+  <div class="container">
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+      <ul class="nav navbar-nav">
+        <li><a>MusicBox</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <coustom-dropdown [options]='tags' [selectHandler]='getByTag' [currentOption]='currentOption'></coustom-dropdown>
+        </li>
+        <li><a>Profile</a></li>
+        <li><a>Login</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

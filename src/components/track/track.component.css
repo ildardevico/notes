@@ -1,0 +1,58 @@
+.sngle-track-view {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.track-image {
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 15px;
+  color: #fff;
+  width: 64px;
+  height: 64px;
+}
+
+.track-image .image-spinner-container {
+  position: relative;
+  right: 12px; 
+}
+
+.track-info {
+  width: 90%;
+}
+
+.track-info span {
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+.track-info .track-name {
+  font-weight: bold;
+}
+
+.track-info .duration {
+  font-size: 13px;
+  padding-left: 5px;
+  color: #777;
+}
+
+.track-actions i {
+  color: #999999;
+}
+.track-actions i:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.liked i {
+    color: #b90000;
+}
+.liked i:hover {
+    color: black;
+}
+
+.sngle-track-view:hover {
+  background-color: #eee;
+}
