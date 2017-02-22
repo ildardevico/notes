@@ -1,4 +1,4 @@
-# Notes
+# Soundcloud client with angular 2
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
@@ -25,6 +25,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Deploying to GitHub Pages
 
 Run `ng github-pages:deploy` to deploy to GitHub Pages.
+Link to GitHub Pages (https://ildardevico.github.io/soundcloud/)
 
 ## Further help
 
