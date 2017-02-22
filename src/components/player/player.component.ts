@@ -13,12 +13,18 @@ export class PlayerComponent implements OnInit {
   currentTrack: Track;
   play: boolean;
   time: string;
+  nextBlocked: boolean = false;
+  previousBlocked: boolean = false;
 
   constructor(private playerService: PlayerService, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     const { currentState, time, playState } = this.playerService
-    currentState.subscribe(({ currentTrack }) => this.currentTrack = currentTrack)
+    currentState.subscribe(({ currentTrack, previousBlocked, nextBlocked }) => {
+       this.currentTrack = currentTrack
+       this.previousBlocked = previousBlocked
+       this.nextBlocked = nextBlocked
+    })
     time.subscribe(time => this.time = `${time}%`)
     playState.subscribe(play => this.play = play)
   }

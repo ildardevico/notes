@@ -9,21 +9,16 @@ const getPlayerState = player => () => !player.paused
 
 @Injectable()
 export class PlayerService {
+
   player = new Audio();
 
   currentState = new BehaviorSubject({
     playlist: null,
     currentTrack: null,
     trackIndex: -1,
+    previousBlocked: false,
+    nextBlocked: false,
   })
-
-  timeupdate: Observable<any> = Observable
-  .fromEvent(this.player, 'timeupdate')
-  .map(getProgress(this.player));
-
-  seeked: Observable<any> = Observable
-  .fromEvent(this.player, 'seeked')
-  .map(getProgress(this.player));
 
   playState: Observable<any> = Observable.merge(
     Observable
@@ -34,7 +29,14 @@ export class PlayerService {
     .map(getPlayerState(this.player))
   )
 
-  time: Observable<any> = Observable.merge(this.timeupdate, this.seeked);
+  time: Observable<any> = Observable.merge(
+    Observable
+    .fromEvent(this.player, 'timeupdate')
+    .map(getProgress(this.player)),
+    Observable
+    .fromEvent(this.player, 'seeked')
+    .map(getProgress(this.player))
+  );
 
   constructor() {
     this.currentState.subscribe(({ currentTrack }) => {
@@ -44,11 +46,11 @@ export class PlayerService {
         this.player.play();
       }
     })
-    Observable.fromEvent(this.player, 'ended').subscribe(this.next)
+    Observable.fromEvent(this.player, 'ended').subscribe(this.next);
   }
 
   play(newTrack, playlist, trackIndex): void {
-    const { currentTrack } = this.currentState.getValue()
+    const { currentTrack } = this.currentState.getValue();
     if(this.player.paused && currentTrack && currentTrack.id === newTrack.id) {
       this.player.play()
     } else {
@@ -56,6 +58,8 @@ export class PlayerService {
         playlist,
         currentTrack: newTrack,
         trackIndex,
+        previousBlocked: !playlist[trackIndex - 1],
+        nextBlocked: !playlist[trackIndex + 1],
       });
     }
   }
@@ -72,6 +76,8 @@ export class PlayerService {
         playlist,
         currentTrack: playlist[newIndex],
         trackIndex: newIndex,
+        previousBlocked: !playlist[newIndex - 1],
+        nextBlocked: !playlist[newIndex + 1],
       });
     }
   }
@@ -84,6 +90,8 @@ export class PlayerService {
         playlist,
         currentTrack: playlist[newIndex],
         trackIndex: newIndex,
+        previousBlocked: !playlist[newIndex - 1],
+        nextBlocked: !playlist[newIndex + 1],
       });
     }
   }

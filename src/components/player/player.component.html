@@ -5,9 +5,26 @@
   <div class="audio-player-controls">
     <div class="audio-player-button-wrappers">
       <div class='play-navigation'>
-        <i (click)='previous()' class="material-icons">fast_rewind</i>
-        <i (click)='play ? stop(): playTrack()' class="material-icons">{{!play ? 'play_arrow': 'pause'}}</i>
-        <i (click)='next()' class="material-icons">fast_forward</i>
+        <i
+          (click)='!previousBlocked && previous()'
+          [ngClass]="{'disabled': previousBlocked}"
+          class="material-icons"
+        >
+            fast_rewind
+        </i>
+        <i
+          (click)='play ? stop(): playTrack()'
+          class="material-icons"
+        >
+          {{!play ? 'play_arrow': 'pause'}}
+        </i>
+        <i
+          (click)='!nextBlocked && next()'
+          [ngClass]="{'disabled': nextBlocked}"
+          class="material-icons"
+        >
+          fast_forward
+        </i>
       </div>
       <div [style.background-image]="getImageUri(currentTrack.user)" class="audio-player-image">
       </div>

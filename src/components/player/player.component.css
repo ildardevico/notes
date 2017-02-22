@@ -49,3 +49,14 @@
   color: black;
   cursor: pointer;
 }
+
+.audio-player-wrapper .audio-player-controls .audio-player-button-wrappers .disabled {
+  color: #999999;
+  opacity: 0.7;
+}
+
+.audio-player-wrapper .audio-player-controls .audio-player-button-wrappers .disabled:hover {
+  cursor: not-allowed;
+  color: #999999;
+  opacity: 0.7;
+}
