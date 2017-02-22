@@ -25,24 +25,29 @@ export class PlayerComponent implements OnInit {
        this.previousBlocked = previousBlocked
        this.nextBlocked = nextBlocked
     })
-    time.subscribe(time => this.time = `${time}%`)
+    time.subscribe(time => this.time = time)
     playState.subscribe(play => this.play = play)
   }
 
-  next() {
+  next(): void {
     this.playerService.next()
   }
 
-  previous() {
+  previous(): void {
     this.playerService.previous()
   }
 
-  stop() {
+  stop(): void {
     this.playerService.stop()
   }
 
-  playTrack() {
+  playTrack(): void {
     this.playerService.player.play()
+  }
+
+  updateTime = (width): void =>  {
+    const { duration } = this.playerService.player
+    this.playerService.player.currentTime = (width/100) * duration
   }
 
   getImageUri = ({ avatar_url }) =>  this.sanitizer.bypassSecurityTrustStyle((`url(${avatar_url})`))

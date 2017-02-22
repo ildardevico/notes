@@ -1,8 +1,0 @@
-.tracks-container {
-  overflow-x: auto;
-  height: 82vh;
-}
-
-.tracks-container.loaded {
-  opacity: 1;
-}

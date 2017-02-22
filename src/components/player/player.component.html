@@ -1,6 +1,6 @@
 <div *ngIf='currentTrack' class="audio-player-wrapper">
   <div class="progress">
-    <div class="progress-bar progress-bar-danger" [style.width]="time"></div>
+    <progressbar [updateValueHandler]='updateTime' [value]="time"></progressbar>
   </div>
   <div class="audio-player-controls">
     <div class="audio-player-button-wrappers">

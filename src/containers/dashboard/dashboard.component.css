@@ -2,3 +2,9 @@
   width: 70%;
   margin: 0 auto;
 }
+
+track-list {
+  overflow-x: auto;
+  height: 82vh;
+  display: block;
+}

@@ -19,6 +19,7 @@ import { TrackComponent } from './components/track/track.component';
 import { SpinnerComponent } from './components/base/spinner/spinner.component';
 import { DropdownComponent } from './components/base/dropdown/dropdown.component';
 import { PlayerComponent } from './components/player/player.component'
+import { ProgressbarBasic  } from './components/base/progressbar/progressbar.component'
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PlayerComponent } from './components/player/player.component'
     SpinnerComponent,
     DropdownComponent,
     PlayerComponent,
+    ProgressbarBasic,
   ],
   imports: [
     NgbModule,
@@ -37,6 +39,7 @@ import { PlayerComponent } from './components/player/player.component'
     FormsModule,
     HttpModule,
     RoutingModule,
+    NgbModule.forRoot(),
   ],
   providers: [
     TracksService,

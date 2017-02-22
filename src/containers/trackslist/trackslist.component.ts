@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, HostListener } from '@angular/core'
 import { TracksService } from '../../services/tracks.service'
 import { PlayerService } from '../../services/player.service'
 import { Track } from '../../models'
@@ -24,6 +24,11 @@ export class TrackListComponent implements OnInit {
     checkIfScrollBottom(e.target) && this.loadMore()
   }
 
+  @HostListener('scroll', ['$event'])
+    onScroll(event) {
+      this.checkLoadMore(event)
+    }
+
   loadMore(): void {
     this.tracksService.loadMoreTracks()
   }
@@ -35,9 +40,6 @@ export class TrackListComponent implements OnInit {
       this.currentTrack = currentTrack
     })
     this.playerService.playState.subscribe(play => this.play = play)
-    Observable
-    .fromEvent(document.querySelector('.tracks-container'), 'scroll')
-    .subscribe(this.checkLoadMore)
   }
 
   playTrack(trackIndex): void {
