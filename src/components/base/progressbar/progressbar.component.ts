@@ -9,6 +9,10 @@ import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/
       [value]="value"
       >
       </ngb-progressbar>
+      <span class='time-container'>
+        <span>{{ currentTime }}</span>
+        <span>{{ duration }}</span>
+      </span>
    </div>
   `,
   styles: ['./progressbar.component.css']
@@ -16,6 +20,8 @@ import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/
 export class ProgressbarBasic {
   @Input() value: number;
   @Input() updateValueHandler: Function;
+  @Input() currentTime: string;
+  @Input() duration: string;
 
   @ViewChild('progresselement')
     progressElement: ElementRef;

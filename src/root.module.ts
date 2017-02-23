@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, RequestOptions, XHRBackend, Http} from '@angular/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentModule } from 'angular2-moment';
 
 import { TracksService } from './services/tracks.service';
 import { HttpService, provideFactory } from './services/http.service';
@@ -21,6 +22,7 @@ import { DropdownComponent } from './components/base/dropdown/dropdown.component
 import { PlayerComponent } from './components/player/player.component';
 import { ProgressbarBasic  } from './components/base/progressbar/progressbar.component';
 import { VolumeRangeComponent } from './components/base/volumerange/volumerange.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { VolumeRangeComponent } from './components/base/volumerange/volumerange.
     HttpModule,
     RoutingModule,
     NgbModule.forRoot(),
+    MomentModule,
   ],
   providers: [
     TracksService,

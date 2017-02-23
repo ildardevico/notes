@@ -39,7 +39,8 @@
 }
 
 .track-info .paused-container i {
-  position:absolute;
+  position: relative;
+  top: 7px;
 }
 
 .track-info .paused-container {

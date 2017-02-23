@@ -3,6 +3,7 @@ import { Track } from '../../models'
 import { PlayerService } from '../../services/player.service'
 import { DomSanitizer } from '@angular/platform-browser'
 import { Observable } from 'rxjs';
+import { toMMSS } from '../../utils/helpers'
 
 @Component({
   selector: 'player',
@@ -17,6 +18,8 @@ export class PlayerComponent implements OnInit {
   nextBlocked: boolean = false;
   previousBlocked: boolean = false;
   muted: boolean = false;
+  currentTime: string;
+  duration: string;
 
   constructor(private playerService: PlayerService, private sanitizer: DomSanitizer) {}
 
@@ -27,7 +30,11 @@ export class PlayerComponent implements OnInit {
        this.previousBlocked = previousBlocked
        this.nextBlocked = nextBlocked
     })
-    time.subscribe(time => this.time = time)
+    time.subscribe(time => {
+      this.time = time
+      this.duration = toMMSS(Math.round(this.playerService.player.duration))
+      this.currentTime = toMMSS(Math.round(this.playerService.player.currentTime))
+    })
     playState.subscribe(play => this.play = play)
     volume.subscribe(volume => this.volume = volume)
   }
@@ -54,13 +61,11 @@ export class PlayerComponent implements OnInit {
   }
 
   updateVolume = (volume): void => {
-    if(volume && (+volume)) {
+    if(volume) {
       this.playerService.player.volume = volume
       if(this.muted) {
         this.muted = false
       }
-    } else if(!(+volume)) {
-      this.muted = true
     }
   }
 
