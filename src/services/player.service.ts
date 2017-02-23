@@ -7,6 +7,7 @@ const getTrackSrc = ({ stream_url }) => `${stream_url}?client_id=${config.client
 const getProgress = player => () => (player.currentTime/player.duration) * 100
 const getPlayerState = player => () => !player.paused
 
+
 @Injectable()
 export class PlayerService {
 
@@ -37,6 +38,10 @@ export class PlayerService {
     .fromEvent(this.player, 'seeked')
     .map(getProgress(this.player))
   );
+
+  volume: Observable<any> = Observable
+  .fromEvent(this.player, 'volumechange')
+  .map(() => this.player.volume);
 
   constructor() {
     this.currentState.subscribe(({ currentTrack }) => {

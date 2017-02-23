@@ -7,8 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TracksService } from './services/tracks.service';
 import { HttpService, provideFactory } from './services/http.service';
-import { UsersService } from './services/user.service'
-import { PlayerService } from './services/player.service'
+import { UsersService } from './services/user.service';
+import { PlayerService } from './services/player.service';
 
 import { LayoutComponent } from './containers/layout/layout.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
@@ -18,8 +18,9 @@ import { TrackListComponent } from './containers/trackslist/trackslist.component
 import { TrackComponent } from './components/track/track.component';
 import { SpinnerComponent } from './components/base/spinner/spinner.component';
 import { DropdownComponent } from './components/base/dropdown/dropdown.component';
-import { PlayerComponent } from './components/player/player.component'
-import { ProgressbarBasic  } from './components/base/progressbar/progressbar.component'
+import { PlayerComponent } from './components/player/player.component';
+import { ProgressbarBasic  } from './components/base/progressbar/progressbar.component';
+import { VolumeRangeComponent } from './components/base/volumerange/volumerange.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgressbarBasic  } from './components/base/progressbar/progressbar.com
     DropdownComponent,
     PlayerComponent,
     ProgressbarBasic,
+    VolumeRangeComponent,
   ],
   imports: [
     NgbModule,

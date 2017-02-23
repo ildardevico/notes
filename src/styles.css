@@ -22,3 +22,13 @@
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(102, 102, 102, 0.80);
 }
+
+
+.progress {
+  height: 10px;
+}
+
+.progress-bar {
+  -webkit-transition: none;
+  background-color: rgb(185, 0, 0);
+}

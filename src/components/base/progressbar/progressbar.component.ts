@@ -6,18 +6,12 @@ import { Component, Input, HostListener, ViewChild, ElementRef } from '@angular/
   <div #progresselement class='pr-container'>
     <ngb-progressbar
       class='progressbar-element'
-      type="danger"
-      [striped]="true"
       [value]="value"
-      [animated]="true"
-      ></ngb-progressbar>
+      >
+      </ngb-progressbar>
    </div>
   `,
-  styles: [`
-    .pr-container {
-      cursor: pointer;
-    }`
-  ]
+  styles: ['./progressbar.component.css']
 })
 export class ProgressbarBasic {
   @Input() value: number;

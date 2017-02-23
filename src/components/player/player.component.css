@@ -1,6 +1,9 @@
 .audio-player-wrapper {
-  width: 70%;
-  margin: 0 auto;
+  display: block;
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    background-color: white;
 }
 
 .audio-player-wrapper .audio-player-image {
@@ -11,7 +14,9 @@
   background-position-x: center;
 }
 
-.audio-player-wrapper .audio-player-controls .progress {
+.audio-player-wrapper .audio-player-controls {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .audio-player-wrapper .audio-player-controls .audio-player-button-wrappers {

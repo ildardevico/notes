@@ -1,5 +1,5 @@
 <div *ngIf='currentTrack' class="audio-player-wrapper">
-  <div class="progress">
+  <div>
     <progressbar [updateValueHandler]='updateTime' [value]="time"></progressbar>
   </div>
   <div class="audio-player-controls">
@@ -33,6 +33,9 @@
         <span>
           {{currentTrack.user.username}}
         </span>
+      </div>
+      <div>
+        <volume-range [muted]='muted' [mute]='mutePlayer' [updateValueHandler]='updateVolume' [value]="volume"></volume-range>
       </div>
     </div>
   </div>
